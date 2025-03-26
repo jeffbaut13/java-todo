@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-estudiantes
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cat
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    networks:
+      - red-estudiantes
+    restart: always
+
+  app:
+    build: .
+    container_name: estudiante-app
+    ports:
+      - "8092:8092"
+    depends_on:
+      - mysql
+    networks:
+      - red-estudiantes
+    restart: always
+
+networks:
+  red-estudiantes:

@@ -1,0 +1,10 @@
+target/
+.idea/
+*.iml
+*.log
+node_modules/
+*.zip
+*.tar
+*.tar.gz
+db_data/
+
